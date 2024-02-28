@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { ModalProvider } from "@/providers/modal-provider";
+import { ToastProvider } from "@/providers/toast-provider";
+import { cn } from "@/lib/utils";
 
-const inter = Inter({ subsets: ["latin"] });
+const font = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn(font.className, "flex flex-col")}>
+        <ModalProvider />
+        <ToastProvider />
+        <main className="flex-1">{children}</main>
+      </body>
     </html>
   );
 }

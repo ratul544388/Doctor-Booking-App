@@ -1,0 +1,85 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String?       @unique
+  password      String?
+  emailVerified DateTime?
+  image         String?
+  role          Role          @default(USER)
+  accounts      Account[]
+  appointments  Appointment[]
+}
+
+model Doctor {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  image          String
+  blurDataUrl    String
+  experience     Int
+  category       String
+  chamber        String
+  description    String
+  appointmentFee Float
+  appointments   Appointment[]
+  createdAt      DateTime      @default(now())
+}
+
+model Appointment {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  name            String
+  phone           String
+  address         String
+  appointmentDate DateTime
+
+  doctor   Doctor @relation(fields: [doctorId], references: [id], onDelete: Cascade)
+  doctorId String @db.ObjectId
+
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  status Status @default(PENDING)
+
+  verificationCode Int?
+  isVerified       Boolean @default(false)
+}
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  PENDING
+  CANCELED
+  COMPLETE
+}
