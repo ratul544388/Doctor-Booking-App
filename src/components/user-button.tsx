@@ -24,10 +24,6 @@ export const UserButton = ({ user }: UserButtonProps) => {
       onClick: () => router.push("/profile"),
     },
     {
-      label: "My Apointments",
-      onClick: () => router.push("/my-appointments"),
-    },
-    {
       label: "Logout",
       onClick: () => signOut({ callbackUrl: "/" }),
     },

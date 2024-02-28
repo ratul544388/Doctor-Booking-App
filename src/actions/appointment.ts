@@ -12,6 +12,9 @@ export async function getAppointments({ userId }: { userId: string }) {
     include: {
       doctor: true,
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return appointments;

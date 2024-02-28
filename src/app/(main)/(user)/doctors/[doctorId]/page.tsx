@@ -1,16 +1,13 @@
 import { getDoctors } from "@/actions/doctors";
-import { BookAppointmentButton } from "@/components/book-appointment-button";
 import { CategoryBadge } from "@/components/category-badge";
 import { DoctorInfoCard } from "@/components/doctor-info-card";
+import { PageHeading } from "@/components/page-heading";
 import { Photo } from "@/components/photo";
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
-import { GraduationCap, LocateIcon, MapPin } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import React from "react";
 
 const Page = async ({ params }: { params: { doctorId: string } }) => {
   const doctor = await db.doctor.findUnique({
@@ -28,7 +25,7 @@ const Page = async ({ params }: { params: { doctorId: string } }) => {
   const user = await currentUser();
   return (
     <div className="flex flex-col gap-4 h-full">
-      <h2 className="text-3xl font-bold">{name}</h2>
+      <PageHeading>{name}</PageHeading>
       <Separator />
       <div className="flex flex-col lg:flex-row gap-8 w-full">
         <div className="flex flex-col gap-6 w-full">

@@ -23,8 +23,10 @@ import { RegisterSchema } from "@/schemas";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { AuthButtons } from "../_components/auth-buttons";
+import { useRouter } from "next/navigation";
 
 const RegisterPage = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema),
@@ -44,6 +46,7 @@ const RegisterPage = () => {
             password: values.password,
             callbackUrl: "/",
           });
+          router.refresh();
         } else if (error) {
           window.alert(error);
         }

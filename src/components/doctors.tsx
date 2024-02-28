@@ -8,9 +8,8 @@ import { EditIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { BookAppointmentButton } from "./book-appointment-button";
-import { Button, buttonVariants } from "./ui/button";
 import { CategoryBadge } from "./category-badge";
+import { Button, buttonVariants } from "./ui/button";
 
 interface DoctorsProps {
   doctors: Doctor[];
@@ -60,7 +59,7 @@ export const Doctors = ({
               onClick={handleClick}
               className="group flex flex-col"
             >
-              <div className="relative w-full aspect-square">
+              <div className="relative w-full aspect-square overflow-hidden">
                 <Image
                   src={image}
                   alt={name}
@@ -71,7 +70,7 @@ export const Doctors = ({
                 />
               </div>
               <div className="flex flex-col p-3 pb-0">
-                <CategoryBadge category={category}/>
+                <CategoryBadge category={category} />
                 <h3 className="font-semibold text-lg mt-2 line-clamp-1">
                   {name}
                 </h3>
@@ -104,14 +103,15 @@ export const Doctors = ({
                 </Button>
               </div>
             ) : (
-              <BookAppointmentButton
-                doctorId={id}
-                user={user}
-                doctorName={name}
-                className="w-full max-w-[90%] mx-auto border-[1.3px] border-primary bg-background text-foreground mt-3 hover:bg-primary hover:text-white"
+              <Link
+                href={`/doctors/${id}/appointment`}
+                className={cn(
+                  buttonVariants({ variant: "outline" }),
+                  "w-full rounded-full max-w-[90%] mx-auto border-[1.3px] border-primary bg-background text-foreground mt-3 hover:bg-primary hover:text-white"
+                )}
               >
                 Book Now
-              </BookAppointmentButton>
+              </Link>
             )}
           </div>
         )

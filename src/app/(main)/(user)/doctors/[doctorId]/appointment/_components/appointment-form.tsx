@@ -1,14 +1,15 @@
 "use client";
 
-import { useModalStore } from "@/hooks/use-modal-store";
+"use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Button } from "../ui/button";
-import { Modal } from "./modal";
 
 import { createAppointMent } from "@/actions/appointment";
+import { CardWrapper } from "@/components/card-wrapper";
+import { DatePicker } from "@/components/date-picker";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -19,18 +20,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { AppointmentSchema } from "@/schemas";
+import { Doctor } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { toast } from "sonner";
-import { DatePicker } from "../date-picker";
+interface AppointmentFormProps {
+  doctor: Doctor;
+}
 
-interface AppointmentModal {}
-
-export const AppointmentModal = ({}: AppointmentModal) => {
-  const { isOpen, type, onClose, data } = useModalStore();
+export const AppointmentForm = ({ doctor }: AppointmentFormProps) => {
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
-  const open = isOpen && type === "appointmentModal";
 
   const form = useForm<z.infer<typeof AppointmentSchema>>({
     resolver: zodResolver(AppointmentSchema),
@@ -42,16 +42,14 @@ export const AppointmentModal = ({}: AppointmentModal) => {
     },
   });
 
-  const { name, id } = data;
-
   function onSubmit(values: z.infer<typeof AppointmentSchema>) {
     startTransition(() => {
-      createAppointMent({ values, doctorId: id as string }).then(
+      createAppointMent({ values, doctorId: doctor.id }).then(
         ({ error, success }) => {
           if (success) {
             form.reset();
-            onClose();
             toast.success(success);
+            router.push("/my-appointments")
             router.refresh();
           } else {
             toast.error(error);
@@ -62,11 +60,12 @@ export const AppointmentModal = ({}: AppointmentModal) => {
   }
 
   return (
-    <Modal open={open} title={`Book ${name} Appointment`} disabled={isPending}>
+    <CardWrapper title={`Book An Appointment`} className="gap-0">
+      <h1 className="font-semibold text-primary text-center">{doctor.name}</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col h-full gap-8"
+          className="flex flex-col h-full gap-8 mt-5"
         >
           <FormField
             control={form.control}
@@ -138,11 +137,15 @@ export const AppointmentModal = ({}: AppointmentModal) => {
               </FormItem>
             )}
           />
-          <Button disabled={isPending} type="submit" className="rounded-full mt-auto">
+          <Button
+            disabled={isPending}
+            type="submit"
+            className="rounded-full mt-auto"
+          >
             Book
           </Button>
         </form>
       </Form>
-    </Modal>
+    </CardWrapper>
   );
 };

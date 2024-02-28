@@ -36,7 +36,7 @@ export const MobileSidebar = ({ user }: MobileSidebarProps) => {
         variants={variants}
         initial="closed"
         animate={animate}
-        className="fixed left-0 inset-y-0 bg-background border-r shadow-md w-[75vw] z-50 pt-5 pb-3 flex flex-col items-center"
+        className="fixed left-0 inset-y-0 bg-background border-r shadow-md w-[75vw] max-w-[320px] z-50 pt-5 pb-3 flex flex-col items-center"
       >
         <Logo />
         <nav className="w-[90%] flex flex-col h-full pt-10">

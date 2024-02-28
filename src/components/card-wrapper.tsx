@@ -24,12 +24,17 @@ export const CardWrapper = ({
   className,
 }: CardWrapperProps) => {
   return (
-    <Card className={cn('w-full max-w-[400px]', className)}>
-      <CardHeader className="items-center">
-        <CardTitle className="text-2xl">{title}</CardTitle>
-        <CardDescription>{description}</CardDescription>
-      </CardHeader>
-      <CardContent>{children}</CardContent>
-    </Card>
+    <section
+      className={cn(
+        "flex flex-col gap-6 w-full max-w-[400px] mx-auto bg-background shadow_sm border rounded-lg px-5 py-4",
+        className
+      )}
+    >
+      <div className="">
+        <h1 className="text-center text-lg font-semibold">{title}</h1>
+        <p className="text-center">{description}</p>
+      </div>
+      <div className="">{children}</div>
+    </section>
   );
 };

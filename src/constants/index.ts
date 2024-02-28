@@ -16,7 +16,11 @@ export const navLinks = [
     label: "About",
     href: "/about",
   },
-];
+  {
+    label: "My Appointments",
+    href: "/my-appointments",
+  },
+] as const;
 
 export const adminNavLinks = [
   {

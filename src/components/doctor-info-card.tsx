@@ -1,12 +1,11 @@
 "use client";
 
-import { Appointment, Doctor, User } from "@prisma/client";
-import { Photo } from "./photo";
-import { GraduationCap, MapPin } from "lucide-react";
-import { BookAppointmentButton } from "./book-appointment-button";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
-import { useModalStore } from "@/hooks/use-modal-store";
+import { Doctor, User } from "@prisma/client";
+import { GraduationCap, MapPin } from "lucide-react";
+import Link from "next/link";
+import { Photo } from "./photo";
+import { buttonVariants } from "./ui/button";
 
 interface DoctorInfoCardProps {
   doctor: Doctor;
@@ -52,14 +51,12 @@ export const DoctorInfoCard = ({
           <span className="text-muted-foreground text-sm">Appointment Fee</span>
         </h5>
         {action && (
-          <BookAppointmentButton
-            doctorId={doctor.id}
-            user={user}
-            doctorName={doctor.name}
-            className="mt-3 bg-primary text-white"
+          <Link
+            href={`/doctors/${doctor.id}/appointment`}
+            className={cn(buttonVariants(), "mt-3 rounded-full")}
           >
             Book An Appointment
-          </BookAppointmentButton>
+          </Link>
         )}
       </div>
     </section>

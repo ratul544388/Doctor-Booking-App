@@ -25,10 +25,10 @@ export const CategorySidebar = ({ className }: { className?: string }) => {
             const isActive =
               searchParams.get("category") === label.toLowerCase();
             return (
-              <CommandItem key={label} className={cn()}>
+              <CommandItem key={label} className={cn("p-0")}>
                 <Link
                   href={`/explore?category=${label.toLowerCase()}`}
-                  className="flex gap-2 font-medium text-base py-1 px-3"
+                  className="flex w-full h-full gap-2 font-medium text-base py-2 px-4"
                 >
                   <Image
                     src={image}

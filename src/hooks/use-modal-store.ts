@@ -1,7 +1,6 @@
 import { create } from "zustand";
 
 export type ModalType =
-  | "appointmentModal"
   | "lgoutModal"
   | "deleteDoctorModal"
   | "cancelAppointmentModal"

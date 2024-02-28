@@ -21,11 +21,12 @@ import { cn } from "@/lib/utils";
 import { LoginSchema } from "@/schemas";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useTransition } from "react";
 import { AuthButtons } from "../_components/auth-buttons";
 
 const LoginPage = () => {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("redirect_url") || "/";
@@ -45,6 +46,7 @@ const LoginPage = () => {
             ...values,
             callbackUrl,
           });
+          router.refresh();
         } else {
           window.alert(error);
         }

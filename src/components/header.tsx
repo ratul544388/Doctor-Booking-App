@@ -14,16 +14,16 @@ import { MobileSidebar } from "./mobile-sidebar";
 
 export const Header = ({ user }: { user: User | null }) => {
   const pathname = usePathname();
-  const links = user?.role === "ADMIN" ? adminNavLinks : navLinks;
+  const links = user?.role === "ADMIN" ? adminNavLinks : navLinks
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-[70px] bg-background border-b shadow-sm">
       <MaxWidthWrapper className="flex items-center justify-between h-full">
         <div className="flex items-center gap-10">
-          <div className="sm:hidden min-w-[15px]">
+          <div className="md:hidden min-w-[15px]">
             <MobileSidebar user={user} />
           </div>
           <Logo />
-          <nav className="hidden sm:flex gap-6">
+          <nav className="hidden md:flex gap-6">
             {links.map(({ href, label }) => {
               const isActive = pathname === href;
               return (
@@ -32,7 +32,8 @@ export const Header = ({ user }: { user: User | null }) => {
                   key={label}
                   className={cn(
                     "relative font-medium text-gray-700",
-                    isActive && "text-foreground"
+                    label === "",
+                    isActive && "text-foreground",
                   )}
                 >
                   {label}
