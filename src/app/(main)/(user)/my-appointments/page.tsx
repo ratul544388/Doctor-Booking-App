@@ -2,9 +2,7 @@ import { getAppointments } from "@/actions/appointment";
 import { PageHeading } from "@/components/page-heading";
 import { Separator } from "@/components/ui/separator";
 import { currentUser } from "@/lib/current-user";
-import { db } from "@/lib/db";
 import { Appointment } from "./_components/appointment";
-import { User } from "@prisma/client";
 
 const Page = async () => {
   const user = await currentUser();
@@ -19,7 +17,6 @@ const Page = async () => {
           <Appointment
             appointment={appointment}
             key={appointment.id}
-            user={user as User}
           />
         ))}
       </section>

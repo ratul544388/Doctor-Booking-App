@@ -1,7 +1,6 @@
 "use client";
 
 import { DoctorInfoCard } from "@/components/doctor-info-card";
-import { Photo } from "@/components/photo";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useModalStore } from "@/hooks/use-modal-store";
@@ -13,10 +12,9 @@ interface AppointmentProps {
   appointment: AppointmentData & {
     doctor: Doctor;
   };
-  user: User;
 }
 
-export const Appointment = ({ appointment, user }: AppointmentProps) => {
+export const Appointment = ({ appointment }: AppointmentProps) => {
   const { onOpen } = useModalStore();
   const info = [
     {
@@ -47,7 +45,6 @@ export const Appointment = ({ appointment, user }: AppointmentProps) => {
     <div className="flex flex-col lg:flex-row gap-5 border rounded-md shadow_sm p-5 w-full">
       <DoctorInfoCard
         doctor={appointment.doctor}
-        user={user}
         className="shadow-transparent border-0 p-0"
       />
       <div className="w-full">

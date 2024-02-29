@@ -9,7 +9,6 @@ import { buttonVariants } from "./ui/button";
 
 interface DoctorInfoCardProps {
   doctor: Doctor;
-  user: User | null;
   action?: boolean;
   className?: string;
 }
@@ -17,13 +16,12 @@ interface DoctorInfoCardProps {
 export const DoctorInfoCard = ({
   action,
   doctor,
-  user,
   className,
 }: DoctorInfoCardProps) => {
   return (
     <section
       className={cn(
-        "flex gap-6 w-full text-sm border rounded-md shadow_sm px-5 py-3",
+        "flex flex-col xs:flex-row gap-6 w-full text-sm border rounded-md shadow_sm px-5 py-3",
         className
       )}
     >

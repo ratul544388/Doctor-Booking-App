@@ -15,17 +15,13 @@ interface DoctorsProps {
   doctors: Doctor[];
   isAdmin?: boolean;
   className?: string;
-  user?: User | null;
 }
 
 export const Doctors = ({
   doctors,
   isAdmin,
   className,
-  user,
 }: DoctorsProps) => {
-  const { onOpen } = useModalStore();
-  const router = useRouter();
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (isAdmin) {
       e.preventDefault();

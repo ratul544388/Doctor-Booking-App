@@ -4,7 +4,6 @@ import { DoctorInfoCard } from "@/components/doctor-info-card";
 import { PageHeading } from "@/components/page-heading";
 import { Photo } from "@/components/photo";
 import { Separator } from "@/components/ui/separator";
-import { currentUser } from "@/lib/current-user";
 import { db } from "@/lib/db";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -22,14 +21,13 @@ const Page = async ({ params }: { params: { doctorId: string } }) => {
 
   const { id, description, name } = doctor;
   const doctors = await getDoctors({ doctorId: id });
-  const user = await currentUser();
   return (
     <div className="flex flex-col gap-4 h-full">
       <PageHeading>{name}</PageHeading>
       <Separator />
       <div className="flex flex-col lg:flex-row gap-8 w-full">
         <div className="flex flex-col gap-6 w-full">
-          <DoctorInfoCard doctor={doctor} user={user} action />
+          <DoctorInfoCard doctor={doctor} action />
           <section className="border rounded-md shadow-md px-5 py-3">
             <h3 className="text-xl font-bold">About {name}</h3>
             <div

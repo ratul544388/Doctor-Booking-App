@@ -16,7 +16,6 @@ export default async function Home({
 }) {
   const q = searchParams.q;
   const doctors = await getDoctors({ q, take: 6 });
-  const user = await currentUser();
 
   return (
     <div className="flex flex-col items-center h-full pt-12">
@@ -65,7 +64,6 @@ export default async function Home({
           <Doctors
             doctors={doctors}
             className="mt-8  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
-            user={user}
           />
         )}
         <div className="flex flex-wrap justify-center gap-5 mt-12">

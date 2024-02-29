@@ -9,7 +9,6 @@ const ExplorePage = async ({
   searchParams: { [key: string]: string };
 }) => {
   const category = searchParams.category;
-  const user = await currentUser();
   const doctors = await getDoctors({ category });
 
   return (
@@ -18,7 +17,6 @@ const ExplorePage = async ({
       <Doctors
         doctors={doctors}
         className=""
-        user={user}
       />
     </div>
   );
