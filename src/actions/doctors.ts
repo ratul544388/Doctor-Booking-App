@@ -12,6 +12,7 @@ export async function getDoctors({
   doctorId,
   take,
 }: { category?: string; q?: string; doctorId?: string; take?: number } = {}) {
+  console.log({ q });
   const doctors = await db.doctor.findMany({
     where: {
       ...(doctorId
@@ -37,6 +38,8 @@ export async function getDoctors({
                   contains: q,
                   mode: "insensitive",
                 },
+              },
+              {
                 category: {
                   contains: q,
                   mode: "insensitive",

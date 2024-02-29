@@ -56,6 +56,8 @@ export const DoctorForm = ({ doctor, title }: DoctorFormProps) => {
           ({ success, error }) => {
             if (success) {
               toast.success(success);
+              router.push("/admin/doctors");
+              router.refresh();
             } else {
               toast.error(error);
             }
@@ -65,13 +67,13 @@ export const DoctorForm = ({ doctor, title }: DoctorFormProps) => {
         createDoctor(values).then(({ success, error }) => {
           if (success) {
             toast.success(success);
+            router.push("/admin/doctors");
+            router.refresh();
           } else {
             toast.error(error);
           }
         });
       }
-      router.push("/admin/doctors");
-      router.refresh();
     });
   }
 
