@@ -19,7 +19,7 @@ export const Header = ({ user }: { user: User | null }) => {
     <header className="fixed inset-x-0 top-0 z-50 h-[70px] bg-background border-b shadow-sm">
       <MaxWidthWrapper className="flex items-center justify-between h-full">
         <div className="flex items-center gap-10">
-          <div className="md:hidden min-w-[15px]">
+          <div className="md:hidden">
             <MobileSidebar user={user} />
           </div>
           <Logo />

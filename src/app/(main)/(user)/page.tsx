@@ -69,7 +69,7 @@ export default async function Home({
           />
         )}
         <div className="flex flex-wrap justify-center gap-5 mt-12">
-          {DoctorCategories.map(({ image, label }, index) => (
+          {DoctorCategories.slice(0, 6).map(({ image, label }, index) => (
             <Link
               href={`/explore?category=${label.toLowerCase()}`}
               className="flex flex-col h-[120px] aspect-[9/7] p-4 gap-2 items-center border rounded-md font-medium bg-blue-50 hover:bg-blue-100 transition-colors shadow-md"

@@ -3,7 +3,7 @@
 import { adminNavLinks, navLinks } from "@/constants";
 import { cn } from "@/lib/utils";
 import { User } from "@prisma/client";
-import { MotionConfig, motion } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -42,6 +42,7 @@ export const MobileSidebar = ({ user }: MobileSidebarProps) => {
         <nav className="w-[90%] flex flex-col h-full pt-10">
           {links.map(({ href, label }) => {
             const isActive = href === pathname;
+
             return (
               <Link
                 onClick={() => setOpen(false)}
@@ -49,7 +50,8 @@ export const MobileSidebar = ({ user }: MobileSidebarProps) => {
                 key={label}
                 className={cn(
                   "px-5 py-2 rounded-md font-medium text_light hover:bg-accent transition-colors",
-                  isActive && "bg-secondary text-foreground"
+                  isActive && "bg-secondary text-foreground",
+                  !user && label === "My Appointments" && "hidden",
                 )}
               >
                 {label}
@@ -87,55 +89,57 @@ export const SidebarTrigger = ({
       onClick={onChange}
       className="absolute top-3 left-3 w-11 hover:bg-secondary transition-colors aspect-square flex items-center justify-center rounded-full cursor-pointer z-[100]"
     >
-      <motion.div
-        animate={{ opacity: 1, transition: { delay: 0.3 } }}
-        className="w-[24px] opacity-0 relative aspect-square"
-      >
-        <motion.span
-          variants={{
-            closed: {
-              top: ["50%", "50%", "0%"],
-              y: ["-50%", "-50%", "0%"],
-              rotate: [45, 0, 0],
-            },
-            open: {
-              top: ["0%", "50%", "50%"],
-              y: ["0%", "-50%", "-50%"],
-              rotate: [0, 0, 45],
-            },
-          }}
-          animate={animate}
-          className="absolute w-full h-[4px] bg-neutral-800 rounded-full"
-        />
-        <motion.span
-          variants={{
-            closed: {
-              rotate: [-45, 0, 0],
-            },
-            open: {
-              rotate: [0, 0, -45],
-            },
-          }}
-          animate={animate}
-          className="absolute w-full h-[4px] bg-neutral-800 rounded-full"
-          style={{ top: "50%", translateY: "-50%" }}
-        />
-        <motion.span
-          variants={{
-            closed: {
-              bottom: 0,
-              y: 0,
-              opacity: [0, 1, 1],
-            },
-            open: {
-              bottom: "50%",
-              y: "50%",
-              opacity: [1, 1, 0],
-            },
-          }}
-          animate={animate}
-          className="absolute w-1/2 h-[4px] bg-neutral-800 bottom-0 right-0 rounded-full"
-        />
+      <motion.div className="w-[24px] relative aspect-square">
+        <AnimatePresence initial={false}>
+          <motion.span
+            variants={{
+              closed: {
+                top: ["50%", "50%", "0%"],
+                y: ["-50%", "-50%", "0%"],
+                rotate: [45, 0, 0],
+              },
+              open: {
+                top: ["0%", "50%", "50%"],
+                y: ["0%", "-50%", "-50%"],
+                rotate: [0, 0, 45],
+              },
+            }}
+            initial="closed"
+            animate={animate}
+            className="absolute w-full h-[4px] bg-neutral-800 rounded-full"
+          />
+          <motion.span
+            variants={{
+              closed: {
+                rotate: [-45, 0, 0],
+              },
+              open: {
+                rotate: [0, 0, -45],
+              },
+            }}
+            initial="closed"
+            animate={animate}
+            className="absolute w-full h-[4px] bg-neutral-800 rounded-full"
+            style={{ top: "50%", translateY: "-50%" }}
+          />
+          <motion.span
+            variants={{
+              closed: {
+                bottom: 0,
+                y: 0,
+                opacity: [0, 1, 1],
+              },
+              open: {
+                bottom: "50%",
+                y: "50%",
+                opacity: [1, 1, 0],
+              },
+            }}
+            initial="closed"
+            animate={animate}
+            className="absolute w-1/2 h-[4px] bg-neutral-800 bottom-0 right-0 rounded-full"
+          />
+        </AnimatePresence>
       </motion.div>
     </div>
   );

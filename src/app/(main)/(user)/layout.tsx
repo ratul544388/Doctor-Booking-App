@@ -14,6 +14,7 @@ export default async function MainLayout({
   if (user?.role === "ADMIN") {
     redirect("/admin/doctors");
   }
+
   return (
     <Suspense fallback={<Loader />}>
       <MaxWidthWrapper>{children}</MaxWidthWrapper>

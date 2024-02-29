@@ -43,12 +43,16 @@ export const adminNavLinks = [
 
 export const DoctorCategories = [
   {
+    image: BrainImage,
+    label: "Neurology",
+  },
+  {
     image: TeethImage,
     label: "Dentist",
   },
   {
     image: HeartImage,
-    label: "Cardiologist",
+    label: "Cardiology",
   },
   {
     image: KneeImage,
@@ -56,6 +60,31 @@ export const DoctorCategories = [
   },
   {
     image: BrainImage,
-    label: "Neurologist",
+    label: "Ophthalmology",
+  },
+  {
+    image: BrainImage,
+    label: "Dermatology",
+  },
+  {
+    image: BrainImage,
+    label: "Audiology",
+  },
+  {
+    image: BrainImage,
+    label: "Pulmonology",
+  },
+  {
+    image: BrainImage,
+    label: "General",
+  },
+  {
+    image: BrainImage,
+    label: "Gastroenterology",
+  },
+  {
+    image: BrainImage,
+    label: "Nephrology",
   },
 ];
+

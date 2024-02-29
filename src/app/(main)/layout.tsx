@@ -9,11 +9,14 @@ export default async function MainLayout({
   children: ReactNode;
 }) {
   const user = await currentUser();
+  
   return (
     <>
       <Header user={user} />
       <Suspense fallback={<Loader />}>
-        <div className="h-full pt-[90px]">{children}</div>
+        <div className="h-full pt-[90px] pb-10">
+          {children}
+        </div>
       </Suspense>
     </>
   );
