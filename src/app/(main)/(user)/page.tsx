@@ -15,7 +15,7 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const q = searchParams.q;
-  const doctors = await getDoctors({ q });
+  const doctors = await getDoctors({ q, take: 6 });
   const user = await currentUser();
 
   return (

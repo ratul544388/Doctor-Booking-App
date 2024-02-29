@@ -10,7 +10,8 @@ export async function getDoctors({
   category,
   q,
   doctorId,
-}: { category?: string; q?: string; doctorId?: string } = {}) {
+  take,
+}: { category?: string; q?: string; doctorId?: string; take?: number } = {}) {
   const doctors = await db.doctor.findMany({
     where: {
       ...(doctorId
@@ -45,6 +46,7 @@ export async function getDoctors({
           }
         : {}),
     },
+    ...(take ? { take } : {}),
   });
 
   return doctors;
@@ -65,8 +67,8 @@ export async function createDoctor(values: z.infer<typeof DoctorSchema>) {
 
     const blurDataUrl = await getBase64(values.image);
 
-    if(!blurDataUrl) {
-      return {error: "Error while generating BlurDataUrl"}
+    if (!blurDataUrl) {
+      return { error: "Error while generating BlurDataUrl" };
     }
 
     await db.doctor.create({

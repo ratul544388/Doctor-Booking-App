@@ -40,7 +40,7 @@ export const MobileSidebar = ({ user }: MobileSidebarProps) => {
       >
         <Logo />
         <nav className="w-[90%] flex flex-col h-full pt-10">
-          {links.map(({ href, label }) => {
+          {links.map(({ href, label, icon: Icon }) => {
             const isActive = href === pathname;
 
             return (
@@ -49,11 +49,12 @@ export const MobileSidebar = ({ user }: MobileSidebarProps) => {
                 href={href}
                 key={label}
                 className={cn(
-                  "px-5 py-2 rounded-md font-medium text_light hover:bg-accent transition-colors",
+                  "px-5 flex items-center gap-4 py-2 rounded-md font-medium text_light hover:bg-accent transition-colors",
                   isActive && "bg-secondary text-foreground",
                   !user && label === "My Appointments" && "hidden",
                 )}
               >
+                <Icon className="h-5 w-5"/>
                 {label}
               </Link>
             );

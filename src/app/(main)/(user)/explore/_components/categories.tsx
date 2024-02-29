@@ -17,15 +17,16 @@ export const Categories = ({}: CategoriesProps) => {
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
+    const currentRef = scrollRef.current;
     const handleScroll = () => {
-      if (scrollRef.current) {
-        setScroll(scrollRef.current.scrollLeft);
+      if (currentRef) {
+        setScroll(currentRef.scrollLeft);
       }
     };
-    scrollRef.current?.addEventListener("scroll", handleScroll);
+    currentRef?.addEventListener("scroll", handleScroll);
 
     return () => {
-      scrollRef.current?.removeEventListener("scroll", handleScroll);
+      currentRef?.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
