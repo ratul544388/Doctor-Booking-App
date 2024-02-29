@@ -88,17 +88,29 @@ export const DoctorCategories = [
     image: LeverImage,
     label: "Pulmonology",
   },
-  // {
-  //   image: BrainImage,
-  //   label: "General",
-  // },
-  // {
-  //   image: BrainImage,
-  //   label: "Gastroenterology",
-  // },
-  // {
-  //   image: BrainImage,
-  //   label: "Nephrology",
-  // },
+  {
+    image: BrainImage,
+    label: "General",
+  },
+  {
+    image: BrainImage,
+    label: "Gastroenterology",
+  },
+  {
+    image: BrainImage,
+    label: "Nephrology",
+  },
+  {
+    image: BrainImage,
+    label: "Oncology",
+  },
+  {
+    image: BrainImage,
+    label: "Endocrinology",
+  },
+  {
+    image: BrainImage,
+    label: "Rheumatology",
+  },
 ];
 

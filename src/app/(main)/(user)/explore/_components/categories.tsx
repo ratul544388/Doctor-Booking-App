@@ -50,12 +50,12 @@ export const Categories = ({}: CategoriesProps) => {
   return (
     <nav
       ref={scrollRef}
-      className="z-40 flex items-center gap-3 overflow-x-auto scrollbar-none"
+      className="z-40 relative flex items-center gap-3 overflow-x-auto scrollbar-none"
     >
       <Button
         onClick={handleClick}
         className={cn(
-          "rounded-full absolute left-3 hidden shadow-[10px_0px_10px_rgba(0,0,0,0.06)]",
+          "rounded-full sticky min-w-[35px] min-h-[35px] left-0 hidden shadow-[10px_0px_10px_rgba(0,0,0,0.06)]",
           scroll > 20 && "flex"
         )}
         size="icon"
@@ -65,10 +65,12 @@ export const Categories = ({}: CategoriesProps) => {
       </Button>
       <Link
         href="/explore"
-        className={buttonVariants({
-          variant: !activeLink ? "default" : "outline",
-          size: "sm",
-        })}
+        className={cn(
+          buttonVariants({
+            variant: !activeLink ? "default" : "outline",
+            size: "sm",
+          })
+        )}
       >
         All
       </Link>
@@ -84,11 +86,10 @@ export const Categories = ({}: CategoriesProps) => {
           {label}
         </Link>
       ))}
-
       <Button
         onClick={handleRightClick}
         className={cn(
-          "rounded-full absolute right-3 shadow-[-10px_0px_10px_rgba(0,0,0,0.06)]",
+          "rounded-full sticky min-w-[35px] min-h-[35px] -right-0 shadow-[-10px_0px_10px_rgba(0,0,0,0.06)]",
           scrollRef?.current?.scrollWidth! -
             scrollRef.current?.scrollLeft! -
             scrollRef.current?.clientWidth! <
