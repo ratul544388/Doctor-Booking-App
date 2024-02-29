@@ -14,7 +14,7 @@ import { MobileSidebar } from "./mobile-sidebar";
 
 export const Header = ({ user }: { user: User | null }) => {
   const pathname = usePathname();
-  const links = user?.role === "ADMIN" ? adminNavLinks : navLinks
+  const links = user?.role === "ADMIN" ? adminNavLinks : navLinks;
   return (
     <header className="fixed inset-x-0 top-0 z-50 h-[70px] bg-background border-b shadow-sm">
       <MaxWidthWrapper className="flex items-center justify-between h-full">
@@ -34,6 +34,7 @@ export const Header = ({ user }: { user: User | null }) => {
                     "relative font-medium text-gray-700",
                     label === "",
                     isActive && "text-foreground",
+                    !user && label === "My Appointments" && "hidden"
                   )}
                 >
                   {label}
