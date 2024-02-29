@@ -14,7 +14,7 @@ export default async function MainLayout({
     <>
       <Header user={user} />
       <Suspense fallback={<Loader />}>
-        <div className="h-full pt-[90px] pb-10">
+        <div className="h-full pt-[80px] pb-10">
           {children}
         </div>
       </Suspense>
