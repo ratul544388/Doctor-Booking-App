@@ -1,6 +1,5 @@
 "use client";
 
-import { MaxWidthWrapper } from "@/components/max-width-wrapper";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { DoctorCategories } from "@/constants";
 import { cn } from "@/lib/utils";
