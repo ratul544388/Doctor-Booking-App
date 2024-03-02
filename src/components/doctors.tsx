@@ -1,15 +1,14 @@
 "use client";
 
-import { useModalStore } from "@/hooks/use-modal-store";
 import { cn } from "@/lib/utils";
-import { Doctor, User } from "@prisma/client";
+import { Doctor } from "@prisma/client";
 import { TrashIcon } from "@radix-ui/react-icons";
 import { EditIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { CategoryBadge } from "./category-badge";
 import { Button, buttonVariants } from "./ui/button";
+import { Skeleton } from "./ui/skeleton";
 
 interface DoctorsProps {
   doctors: Doctor[];
@@ -17,11 +16,7 @@ interface DoctorsProps {
   className?: string;
 }
 
-export const Doctors = ({
-  doctors,
-  isAdmin,
-  className,
-}: DoctorsProps) => {
+export const Doctors = ({ doctors, isAdmin, className }: DoctorsProps) => {
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (isAdmin) {
       e.preventDefault();
@@ -113,5 +108,15 @@ export const Doctors = ({
         )
       )}
     </section>
+  );
+};
+
+Doctors.Skeleton = function DoctorSkeleton({ count }: { count: number }) {
+  return (
+    <div className="w-full grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+      {Array.from({ length: count }).map((_, index) => (
+        <Skeleton key={index} className="w-full aspect-[4/6]" />
+      ))}
+    </div>
   );
 };

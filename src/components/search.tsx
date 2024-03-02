@@ -38,7 +38,7 @@ export const Search = ({
         value={value}
         onChange={(e) => setValue(e.target.value)}
       />
-      {debounceValue && !results && <EmptyState title="No results found!" />}
+      {/* {debounceValue && !results && <EmptyState title="No results found!" />} */}
     </div>
   );
 };

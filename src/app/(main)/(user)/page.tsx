@@ -1,13 +1,15 @@
 import DoctorsImage from "@/../public/images/doctors.jpg";
 import { getDoctors } from "@/actions/doctors";
+import Await from "@/components/await";
 import { Doctors } from "@/components/doctors";
 import { Search } from "@/components/search";
+import { DoctorsSkeletons } from "@/components/skeletons/doctors-skeletons";
 import { buttonVariants } from "@/components/ui/button";
 import { DoctorCategories } from "@/constants";
-import { currentUser } from "@/lib/current-user";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function Home({
   searchParams,
@@ -15,7 +17,7 @@ export default async function Home({
   searchParams: { [key: string]: string };
 }) {
   const q = searchParams.q;
-  const doctors = await getDoctors({ q, take: 6 });
+  const promise = getDoctors({ q, take: 6 });
 
   return (
     <div className="flex flex-col items-center h-full pt-12">
@@ -59,13 +61,17 @@ export default async function Home({
         <p className="capitalize text_light">
           Search your doctors and book your appointment in one click
         </p>
-        <Search className="mt-5" results={doctors.length} />
-        {q && !!doctors.length && (
-          <Doctors
-            doctors={doctors}
-            className="mt-8  md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
-          />
-        )}
+        <Search className="mt-5" />
+        <Suspense fallback={<DoctorsSkeletons count={6} />} key={Math.random()}>
+          <Await promise={promise}>
+            {(doctors) => (
+              <Doctors
+                doctors={doctors}
+                className="mt-8 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
+              />
+            )}
+          </Await>
+        </Suspense>
         <div className="flex flex-wrap justify-center gap-5 mt-12">
           {DoctorCategories.slice(0, 6).map(({ image, label }, index) => (
             <Link
