@@ -62,7 +62,15 @@ export default async function Home({
           Search your doctors and book your appointment in one click
         </p>
         <Search className="mt-5" />
-        <Suspense fallback={<DoctorsSkeletons count={6} />} key={Math.random()}>
+        <Suspense
+          fallback={
+            <DoctorsSkeletons
+              count={6}
+              className="mt-8 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3"
+            />
+          }
+          key={Math.random()}
+        >
           <Await promise={promise}>
             {(doctors) => (
               <Doctors
